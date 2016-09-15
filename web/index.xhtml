@@ -12,20 +12,98 @@
    </h:head>
 
    <h:body>
-      <h:form id="contactForm">
-         <p:panelGrid columns="2">
-            <p:outputLabel value="Names" />
-            <p:inputText />
-            <p:outputLabel value="Last Names" />
-            <p:inputText />
-            <p:outputLabel value="Address" />
-            <p:inputText />
-            <p:outputLabel value="Phone" />
-            <p:inputText />
-            <p:outputLabel value="Email" />
-            <p:inputText />
-            <p:commandButton value="Procesar" />
-         </p:panelGrid>
+      <h:form id="contact_form">
+         <p:growl id="msg"></p:growl>
+         <h:panelGrid columns="1" cellpadding="5">
+            <p:commandButton value="Agregar contacto" type="button" onclick="PF('dlg').show();" />
+         </h:panelGrid>
+
+         <p:dialog header="Agregar contacto" widgetVar="dlg" resizable="false">
+            <h:panelGrid columns="2" cellpadding="5">
+               <h:outputLabel for="name" value="Nombres:" />
+               <p:inputText id="name" value="#{bean.contact_names}" required="true"  />
+
+               <h:outputLabel for="last_names" value="Apellidos:" />
+               <p:password id="last_names" value="#{bean.contact_last_names}" required="true" />
+
+               <f:facet name="footer">
+                  <p:commandButton value="Agregar contacto!" icon="ui-icon-trash" action="#{bean.agregar}" update="contact_form" />
+               </f:facet>
+            </h:panelGrid>
+         </p:dialog>
+
+         <p:dataTable value="#{bean.contactos}" var="c" paginator="true" rows="5" editable="true">
+            <p:ajax event="rowEdit" listener="#{bean.actualizar}" update=":contact_form:msg"></p:ajax>
+            <p:ajax event="rowEditCancel" listener="#{bean.cancelar}" update=":contact_form:msg"></p:ajax>
+
+            <p:column headerText="Nombre">
+               <h:selectBooleanCheckbox value="#{c.selected}" />
+            </p:column>
+            <p:column headerText="Nombre">
+               <p:cellEditor>
+                  <f:facet name="output">
+                     <h:outputText value="#{c.nombre}" />
+                  </f:facet>
+                  <f:facet name="input">
+                     <h:inputText value="#{bean.nombre}" />
+                  </f:facet>
+               </p:cellEditor>
+            </p:column>
+            <p:column headerText="Apellido">
+               <p:cellEditor>
+                  <f:facet name="output">
+                     <h:outputText value="#{c.apellido}" />
+                  </f:facet>
+                  <f:facet name="input">
+                     <h:inputText value="#{bean.apellido}" />
+                  </f:facet>
+               </p:cellEditor>
+            </p:column>
+            <p:column headerText="Correo">
+               <p:cellEditor>
+                  <f:facet name="output">
+                     <h:outputText value="#{c.correo}" />
+                  </f:facet>
+                  <f:facet name="input">
+                     <h:inputText value="#{bean.correo}" />
+                  </f:facet>
+               </p:cellEditor>
+            </p:column>
+            <p:column headerText="Teléfono">
+               <p:cellEditor>
+                  <f:facet name="output">
+                     <h:outputText value="#{c.telefono}" />
+                  </f:facet>
+                  <f:facet name="input">
+                     <h:inputText value="#{bean.telefono}"  />
+                  </f:facet>
+               </p:cellEditor>
+            </p:column>
+            <p:column headerText="Dirección">
+               <p:cellEditor>
+                  <f:facet name="output">
+                     <h:outputText value="#{c.direccion}" />
+                  </f:facet>
+                  <f:facet name="input">
+                     <h:inputText value="#{bean.direccion}" />
+                  </f:facet>
+               </p:cellEditor>
+            </p:column>
+            <p:column>
+               <p:rowEditor/>
+            </p:column>
+         </p:dataTable>
+
+         <br />
+
+         <p:commandButton value="Eliminar seleccionados!" icon="ui-icon-trash" action="#{bean.eliminar()}" update="contact_form">
+            <p:confirm message="Realmente desea realizar la acción?" header="Hey!" icon="ui-icon-alert"></p:confirm>
+         </p:commandButton>
+
+         <p:confirmDialog global="true">
+            <p:commandButton value="Si" type="button" icon="ui-icon-check" styleClass="ui-confirmdialog-yes"></p:commandButton>
+            <p:commandButton value="No" type="button" icon="ui-icon-close" styleClass="ui-confirmdialog-no"></p:commandButton>
+         </p:confirmDialog>
       </h:form>
 
    </h:body>

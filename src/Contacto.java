@@ -7,6 +7,7 @@ public class Contacto {
     private String Direccion;
     private String Telefono;
     private String Correo;
+    private boolean selected;
 
     public Contacto(String nombre, String apellido,String Direccion,String Telefono,String Correo) {
         this.nombre = nombre;
@@ -14,7 +15,7 @@ public class Contacto {
         this.Direccion = Direccion;
         this.Telefono = Telefono;
         this.Correo = Correo;
-
+        this.selected = false;
     }
 
     public String getNombre() {
@@ -55,5 +56,13 @@ public class Contacto {
 
     public void setCorreo(String correo) {
         Correo = correo;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    public boolean isSelected() {
+        return selected;
     }
 }
