@@ -21,13 +21,13 @@
          <p:dialog header="Agregar contacto" widgetVar="dlg" resizable="false">
             <h:panelGrid columns="2" cellpadding="5">
                <h:outputLabel for="name" value="Nombres:" />
-               <p:inputText id="name" value="#{bean.contact_names}" required="true"  />
+               <p:inputText id="name" value="#{bean.contact_names}" />
 
                <h:outputLabel for="last_names" value="Apellidos:" />
-               <p:password id="last_names" value="#{bean.contact_last_names}" required="true" />
+               <p:inputText id="last_names" value="#{bean.contact_last_names}" />
 
                <f:facet name="footer">
-                  <p:commandButton value="Agregar contacto!" icon="ui-icon-trash" action="#{bean.agregar}" update="contact_form" />
+                  <p:commandButton value="Agregar contacto!" icon="ui-icon-check" action="#{bean.agregar}" update="contact_form" />
                </f:facet>
             </h:panelGrid>
          </p:dialog>
@@ -45,7 +45,7 @@
                      <h:outputText value="#{c.nombre}" />
                   </f:facet>
                   <f:facet name="input">
-                     <h:inputText value="#{bean.nombre}" />
+                     <h:inputText value="#{c.nombre}" />
                   </f:facet>
                </p:cellEditor>
             </p:column>
@@ -55,7 +55,7 @@
                      <h:outputText value="#{c.apellido}" />
                   </f:facet>
                   <f:facet name="input">
-                     <h:inputText value="#{bean.apellido}" />
+                     <h:inputText value="#{c.apellido}" />
                   </f:facet>
                </p:cellEditor>
             </p:column>
@@ -65,7 +65,7 @@
                      <h:outputText value="#{c.correo}" />
                   </f:facet>
                   <f:facet name="input">
-                     <h:inputText value="#{bean.correo}" />
+                     <h:inputText value="#{c.correo}" />
                   </f:facet>
                </p:cellEditor>
             </p:column>
@@ -75,7 +75,7 @@
                      <h:outputText value="#{c.telefono}" />
                   </f:facet>
                   <f:facet name="input">
-                     <h:inputText value="#{bean.telefono}"  />
+                     <h:inputText value="#{c.telefono}"  />
                   </f:facet>
                </p:cellEditor>
             </p:column>
@@ -85,7 +85,7 @@
                      <h:outputText value="#{c.direccion}" />
                   </f:facet>
                   <f:facet name="input">
-                     <h:inputText value="#{bean.direccion}" />
+                     <h:inputText value="#{c.direccion}" />
                   </f:facet>
                </p:cellEditor>
             </p:column>

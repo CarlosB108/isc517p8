@@ -11,8 +11,10 @@ import java.util.ArrayList;
 public class Bean {
     private ArrayList< Contacto > contactos = new ArrayList<>( );
     private ArrayList< Contacto > temp_for_clean = new ArrayList<>( );
-    private String nombre, apellido, correo, telefono, direccion;
-    private String contact_names, contact_last_names;
+
+    private String contact_names;
+
+    private String contact_last_names;
 
     public Bean( ){
         contactos.add( new Contacto( "Cesar", "Mendez", "Calle 9A", "809-744-4433", "acmdsfdined@gfsfl.com" ) );
@@ -25,46 +27,6 @@ public class Bean {
 
     public void setContactos(ArrayList<Contacto> contactos) {
         this.contactos = contactos;
-    }
-
-    public String getNombre() {
-        return apellido;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public String getCorreo() {
-        return apellido;
-    }
-
-    public String getTelefono() {
-        return apellido;
-    }
-
-    public String getDireccion() {
-        return apellido;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
     }
 
     public String getContact_last_names() {
@@ -100,7 +62,7 @@ public class Bean {
 
     public void agregar( ){
         if( contact_names.length() == 0 || contact_last_names.length() == 0 ){
-            FacesContext.getCurrentInstance().addMessage( null, new FacesMessage( "Datos incorrectos!" ) );
+            FacesContext.getCurrentInstance().addMessage( null, new FacesMessage( "Datos vacíos!" ) );
             return;
         }
 
@@ -110,12 +72,6 @@ public class Bean {
     }
 
     public void actualizar( RowEditEvent event ){
-        Contacto c = ( Contacto ) event.getObject( );
-        c.setNombre( nombre );
-        c.setApellido( apellido );
-        c.setCorreo( correo );
-        c.setDireccion( direccion );
-        c.setTelefono( telefono);
         FacesContext.getCurrentInstance().addMessage( null, new FacesMessage( "Usuario actualizado!" ) );
     }
 
