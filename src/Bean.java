@@ -66,7 +66,6 @@ public class Bean {
             return;
         }
 
-        //if( error )
         Contacto contacto = new Contacto( contact_names, contact_last_names, "", "", "" );
         contactos.add( contacto );
     }
